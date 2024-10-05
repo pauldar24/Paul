@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="games style/style.css" />
+    <title>Juegos</title>
+    <script type="text/javascript" src="games style/script.js"></script>
+  </head>
+  <body>
+    <header id="mainheader">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="juegos.html">Juegos</a></li>
+        <li><a href="register.html">Registro</a></li>
+      </ul>
+      <select id="genreFilter">
+        <option value="all">All Genres</option>
+      </select>
+    </header>
+    <main>
+      <div id="movie-grid"></div>
+    </main>
+    <div id="movieModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </body>
+</html>

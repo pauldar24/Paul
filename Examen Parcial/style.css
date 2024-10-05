@@ -1,0 +1,125 @@
+body {
+  background-color: #181b24;
+}
+
+.header-inicio {
+  padding: 10px 0;
+  background-color: #7518cc85;
+}
+
+.main-inicio {
+  text-align: center;
+}
+
+.ul-inicio {
+  list-style-type: none;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.li-inicio {
+  padding: 2px;
+  margin: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.a-inicio {
+  text-decoration: none;
+  color: white;
+}
+
+.img-inicio {
+  width: 650px;
+  position: center;
+  text-align: center;
+}
+
+.title-inicio {
+  color: white;
+  text-align: center;
+}
+
+.p-inicio {
+  color: white;
+  text-align: center;
+}
+
+.header-juegos {
+  padding: 10px 0;
+  background-color: #7518cc85;
+}
+
+.main-juegos {
+  text-align: center;
+}
+
+.ul-juegos {
+  list-style-type: none;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.li-juegos {
+  padding: 2px;
+  margin: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.a-juegos {
+  text-decoration: none;
+  color: white;
+}
+
+.title-juegos {
+  color: white;
+  text-align: center;
+}
+
+.p-juegos {
+  color: white;
+  text-align: center;
+}
+
+.fifa {
+  width: 200px;
+  height: 220px;
+  border: 10px solid white;
+  border-bottom: 60px solid white;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.minecraft {
+  width: 200px;
+  height: 220px;
+  border: 10px solid white;
+  border-bottom: 60px solid white;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.fortnite {
+  width: 200px;
+  height: 220px;
+  border: 10px solid white;
+  border-bottom: 60px solid white;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.rocket-league {
+  width: 200px;
+  height: 220px;
+  border: 10px solid white;
+  border-bottom: 60px solid white;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.filtro {
+  text-align: center;
+}

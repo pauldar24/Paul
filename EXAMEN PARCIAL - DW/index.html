@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreePlay Haven</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(255, 255, 255);
+      }
+      .container {
+        width: 90%;
+        margin: auto;
+        overflow: hidden;
+      }
+      nav {
+        background: #cefc03;
+        color: #000000;
+        padding: 1rem 0;
+      }
+      nav ul {
+        padding: 0;
+        list-style: none;
+      }
+      nav ul li {
+        display: inline;
+        margin-right: 20px;
+      }
+      nav a {
+        color: #000000;
+        text-decoration: none;
+      }
+      .btn {
+        display: inline-block;
+        background: #cefc03;
+        color: #000000;
+        padding: 0.5rem 1rem;
+        border: 2px solid black;
+        border-radius: 4%;
+        cursor: pointer;
+        margin-top: 3px;
+        margin-right: 0.5rem;
+        transition: background 0.3s ease;
+      }
+      .btn:hover {
+        background: #ffffff;
+      }
+      .game-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .game-card {
+        border: 5px solid #000000;
+        padding: 1rem;
+        text-align: center;
+      }
+      .favorite {
+        color: gold;
+      }
+      form {
+        max-width: 500px;
+        margin: 2rem auto;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .game-card {
+        border: 2px solid #000000;
+        border-radius: 7%;
+        background-color: #ffffff;
+        padding: 1rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 10px;
+      }
+      .game-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 10px;
+        margin: 10px;
+      }
+      .game-card h3 {
+        margin-top: 0;
+        margin: 10px;
+      }
+      .game-card .btn-container {
+        margin-top: 10px;
+      }
+      #gameDetails img {
+        max-width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: contain;
+      }
+      main {
+        text-align: center;
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      img {
+        width: 600px;
+        height: 300px;
+        text-align: center;
+        position: center;
+      }
+      #gameArea {
+        background-color: #000000;
+        height: 300px;
+        width: 600px;
+        margin: 10px;
+      }
+      #control {
+        margin: 10px;
+      }
+      @media (max-width: 600px) {
+        .game-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('games')">Games</a></li>
+          <li>
+            <a href="#" onclick="showPage('developer')">Register</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" id="content"></div>
+
+    <script>
+      const games = [
+        {
+          id: 1,
+          name: "Slither.io",
+          category: "Free to Play",
+          free: true,
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCmKniyiw0h3xPdsm-DyZMv6n5BV1vaV72uw&s",
+        },
+        {
+          id: 2,
+          name: "Agar.io",
+          category: "Sport",
+          free: true,
+          image:
+            "https://www5.minijuegosgratis.com/v3/games/thumbnails/210110_7_sq.jpg",
+        },
+        {
+          id: 3,
+          name: "Fortnite",
+          category: "Action",
+          free: true,
+          image:
+            "https://pbs.twimg.com/profile_images/1826982647392063488/S3NZyhvU_400x400.jpg",
+        },
+        {
+          id: 4,
+          name: "Rocket League",
+          category: "Free to Play",
+          free: true,
+          image:
+            "https://cdn1.epicgames.com/offer/9773aa1aa54f4f7b80e44bef04986cea/EGS_RocketLeague_PsyonixLLC_S2_1200x1600-8053679ba86b15ee7ced259fe01908c9",
+        },
+        {
+          id: 5,
+          name: "Minecraft",
+          category: "Adventure",
+          free: false,
+          image:
+            "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+        },
+        {
+          id: 6,
+          name: "EAFC 25",
+          category: "Sport",
+          free: false,
+          image:
+            "https://image.api.playstation.com/vulcan/ap/rnd/202409/2712/1e1c42b14d92280e17bda697b8c4ae13ff9f91bdb10fca89.png",
+        },
+      ];
+
+      let favorites = [];
+      let currentCategory = "All";
+
+      function showPage(page) {
+        const content = document.getElementById("content");
+        switch (page) {
+          case "home":
+            content.innerHTML = `
+            <main>
+                        <h1>¡Bienvenido!</h1>
+                        <p>¿Quieres conseguir video juegos free to play? ¡Estás en el lugar
+        correcto!</p>
+        <p>Aquí podrás encontrar la mejor variedad de video juegos que te pueden
+        gustar. De acción hasta deporte. ¡No dejes que tu escritorio esté vacía!</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2Y3mdKtlgAG3qVCYf3T7u5bHTPWjh20m0RQ&s"/>
+        </main>
+                    `;
+            break;
+          case "games":
+            showGames();
+            break;
+          case "developer":
+            content.innerHTML = `
+                        <h2>Register</h2>
+                        <form onsubmit="submitForm(event)">
+                            <input type="text" placeholder="Nombre" required>
+                            <input type="email" placeholder="Email" required>
+                            <input type="text" placeholder="Nombre del juego" required>
+                            <input type="url" placeholder="Link del juego" required>
+                            <button type="submit" class="btn">ENVIAR</button>
+                        </form>
+                    `;
+            break;
+        }
+      }
+
+      function showGames() {
+        const content = document.getElementById("content");
+        content.innerHTML = `
+                <div>
+                    <button class="btn" onclick="filterGames('All')">All</button>
+                    <button class="btn" onclick="filterGames('Free to Play')">Free to Play</button>
+                    <button class="btn" onclick="filterGames('Action')">Action</button>
+                    <button class="btn" onclick="filterGames('Sport')">Sport</button>
+                    <button class="btn" onclick="filterGames('Adventure')">Adventure</button>
+                </div>
+                <div class="game-list" id="gameList"></div>
+            `;
+        updateGameList();
+      }
+
+      function updateGameList() {
+        const gameList = document.getElementById("gameList");
+        gameList.innerHTML = "";
+        games
+          .filter(
+            (game) =>
+              (currentCategory === "All" ||
+                game.category === currentCategory) &&
+              (currentCategory !== "Free to Play" || game.free)
+          )
+          .forEach((game) => {
+            const card = document.createElement("div");
+            card.className = "game-card";
+            card.innerHTML = `
+                    <img src="${game.image}" alt="${
+              game.name
+            }" onerror="this.src='/api/placeholder/200/150'">
+                    <h3>${game.name}</h3>
+                    <p>Category: ${game.category}</p>
+                    <p>${game.free ? "Free to Play" : "Paid"}</p>
+                    <div class="btn-container">
+                        <button class="btn" onclick="showGameDetails(${
+                          game.id
+                        })">View Details</button>
+                        <button class="btn" onclick="toggleFavorite(${
+                          game.id
+                        })">
+                            ${favorites.includes(game.id) ? "★" : "☆"}
+                        </button>
+                    </div>
+                `;
+            gameList.appendChild(card);
+          });
+      }
+
+      function showGameDetails(gameId) {
+        const game = games.find((g) => g.id === gameId);
+        const content = document.getElementById("content");
+        content.innerHTML = `
+                <div id="gameDetails">
+                    <img src="${game.image}" alt="${
+          game.name
+        }" onerror="this.src='/api/placeholder/300/200'">
+                    <h2>${game.name}</h2>
+                    <p>Category: ${game.category}</p>
+                    <p>${game.free ? "Free to Play" : "Paid"}</p>
+                    <button class="btn" onclick="showGames()">Back to List</button>
+                </div>
+            `;
+        if (game.id === 1 || game.id === 2) {
+          content.innerHTML += `
+                    <div id="gameArea" style="margin-top: 20px;">
+                        <button class="btn" onclick="startGame(${game.id})">Play</button>
+                    </div>
+                `;
+        }
+      }
+
+      function startGame(gameId) {
+        if (game.id === 1 || game.id === 2) {
+          const gameArea = document.getElementById("gameArea");
+          gameArea.innerHTML = `
+                <div id="player" style="width: 20px; height: 20px; background: orange; position: relative;"></div>
+                <div id="control">
+                    <button class="btn" onclick="movePlayer('up')">↑</button>
+                    <button class="btn" onclick="movePlayer('left')">←</button>
+                    <button class="btn" onclick="movePlayer('right')">→</button>
+                    <button class="btn" onclick="movePlayer('down')">↓</button>
+                </div>
+            `;
+        }
+      }
+      function movePlayer(direction) {
+        const player = document.getElementById("player");
+        const currentTop = parseInt(player.style.top) || 0;
+        const currentLeft = parseInt(player.style.left) || 0;
+        switch (direction) {
+          case "up":
+            player.style.top = `${currentTop - 10}px`;
+            break;
+          case "down":
+            player.style.top = `${currentTop + 10}px`;
+            break;
+          case "left":
+            player.style.left = `${currentLeft - 10}px`;
+            break;
+          case "right":
+            player.style.left = `${currentLeft + 10}px`;
+            break;
+        }
+      }
+
+      function submitForm(event) {
+        event.preventDefault();
+        alert("¡Gracias por enviar!");
+        event.target.reset();
+      }
+
+      showPage("home");
+    </script>
+  </body>
+</html>
